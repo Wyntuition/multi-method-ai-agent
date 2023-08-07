@@ -1,0 +1,6 @@
+Country,Population,AvailableLand,Water,MetallicElements,Timber,PotentialEnergyUsable,PotentialFossilEnergy,PotentialRenewableEnergy,MetallicAlloys,Food,Farm,Electronics,Housing,MetallicAlloysWaste,ElectronicsWaste,HousingWaste
+Atlantis,100,2000,700,100,200,10,500,100,0,0,0,0,0,0,0,0
+Brodingnang,50,1000,300,100,120,50,500,101,0,0,0,0,0,0,0,0
+Carpania,25,500,100,300,100,50,500,200,0,0,0,0,0,0,0,0
+Dinotopia,30,10,200,200,100,500,10,350,0,0,0,0,0,0,0,0
+Erewhon,70,50,500,1700,100,100,100,100,0,0,0,0,0,0,0,0

@@ -1,0 +1,9 @@
+(TRANSFORM C
+           (INPUTS (Population 1)
+                   (MetallicElements 2)
+                   (PotentialEnergyUsable 3)
+                   (Water 3))
+           (OUTPUTS (Population 1)
+                    (MetallicAlloys 1)
+                    (MetallicAlloysWaste 1)
+                    (Water 2)))
