@@ -4,25 +4,13 @@ from DataTypes.Schedule import Schedule
 from DataTypes.State import State
 from parse_files import ParseFiles
 from ExpectedUtility import ExpectedUtility
+from country_scheduler import country_scheduler
 # from country_scheduler import country_scheduler
 
 directory_path = os.path.dirname(os.path.abspath(__file__)) + "/"
 
 
-def change_state(country_world_state, schedule):
-    # Add/remove the items from the state
-    for item in schedule.inputs:
-        # print(f"Removing {item[1]} {item[0]} to {country_world_state[item[0]]}")
-        country_world_state[item[0]] = float(
-            country_world_state[item[0]]) - float(item[1])
-    for item in schedule.outputs:
-        # print(f"Adding {item[1]} {item[0]} to {country_world_state[item[0]]}")
-        country_world_state[item[0]] = float(
-            country_world_state[item[0]]) + float(item[1])
-
 # Transfer to another country
-
-
 def transfer_operation(self_country, other_country, schedule):
     # Add/remove the items from the state
     for item in schedule.inputs:
@@ -37,6 +25,7 @@ def transfer_operation(self_country, other_country, schedule):
 # PARSE CSV FILES
 ###############################
 
+# TODO - delete these in lieu of parse_files.py
 # Parse world state
 csv_path = directory_path + 'csv/'
 world_state = ParseFiles.parse_csv_dict(
@@ -60,36 +49,42 @@ with open(csv_path + "resource-proportions.csv", "r") as file:
         resource_proportions[row[0]] = float(row[1])
 print(resource_weights)
 
-###############################
-# # CALCULATE EXPECTED UTILITY
-###############################
+##################################
+# CALCULATE INITIAL STATE QUALITY
+##################################
 
-# Calculate starting EU for a country
+# Calculate initial state quality
 self_country = "Dinotopia"
 country_world_state = world_state[self_country]
 self_state_quality_start = ExpectedUtility.state_quality_for_country(
     country_world_state, resource_weights, resource_proportions)
-print(f"Country's state before transform: {country_world_state}")
+print(f"My country's initial state: {country_world_state}")
 
-# TODO - Transform the world state to recalculate the state quality
 
-# TODO - Check prerequisites that the country has the resources to perform the transformation
-
+##################################
+# GENERATE SCHEDULES
+##################################
 # Get all files in the template+path directory
 template_path = directory_path + "transformation-templates/"
 
-# for file_name in os.listdir(template_path):
-# schedule_path = template_path + file_name
-
-# TODO-1 - randomly generate a schedule from templates/
-
-
 csv_path = template_path + "alloys.txt"
-schedule = Schedule()
-# Parse Transformation template
-schedule.parse_transformations_by_nested_parens(csv_path)
+scheduler = Schedule('Dinotopia')
+schedule = scheduler.generate_random_schedule
 
-change_state(country_world_state, schedule)
+
+# def change_state(country_world_state, schedule):
+#     # Add/remove the items from the state
+#     for item in schedule.inputs:
+#         # print(f"Removing {item[1]} {item[0]} to {country_world_state[item[0]]}")
+#         country_world_state[item[0]] = float(
+#             country_world_state[item[0]]) - float(item[1])
+#     for item in schedule.outputs:
+#         # print(f"Adding {item[1]} {item[0]} to {country_world_state[item[0]]}")
+#         country_world_state[item[0]] = float(
+#             country_world_state[item[0]]) + float(item[1])
+
+
+# change_state(country_world_state, schedule)
 
 self_state_quality_end = ExpectedUtility.state_quality_for_country(
     country_world_state, resource_weights, resource_proportions)
@@ -119,16 +114,14 @@ participating_countries = ["Dinotopia", "Atlantis"]
 sigmoid_midpoint = 1  # todo is this right?
 x0 = discounted_reward - sigmoid_midpoint
 
-# TODO - mess with gamma
-k = 1
-L = 1
 
+# TODO: tweak
+# Probability of country's acceptance of a schedule (using logistic function)
+k = 1  # steepness of the curve
+L = 1  # max value of the curve
+p = ExpectedUtility.logistic_function(x0)  # x0 is midpoint of curve
 
-# TODO-1
-# Probability of country's acceptance of a schedule
-p = ExpectedUtility.logistic_function(x0)
-
-# Multiply them for overall schedule acceptance - TODO - this needs rework for multiple countries that will come with other pieces changing for the same reason
+# Multiply them for overall schedule acceptance -
 for country in participating_countries:
     p += p * ExpectedUtility.logistic_function(x0)
 print(f"Probability of schedule acceptance: {p}")

@@ -1,49 +1,74 @@
+import os
+from random import random
+from DataTypes.Transfer import Transfer
 from pyparsing import nestedExpr
 
 
 class Schedule:
-    def __init__(self):
-        self.country = ""
-        self.inputs = []
-        self.outputs = []
+    def __init__(self, self_country):
+        self.country = self_country
+        self.actions = []
 
-    def __str__(self):
-        input_str = "\n".join(
-            [f"({key} {value})" for key, value in self.inputs.items()])
-        output_str = "\n".join(
-            [f"({key} {value})" for key, value in self.outputs.items()])
-        return f"(TRANSFORM C\n   (INPUTS\n      {input_str}\n   )\n   (OUTPUTS\n      {output_str}\n   )\n)"
+        # TODO: pull from initial state file
+        self.COUNTRIES = ['Dinotopia', 'Atlantis',
+                          'Brodingnang', 'Carpania', 'Erewhon']
+        self.RESOURCE_LIST = []
 
-    ########################################
-    # Parse files
-    # Input: full path to file
-    # Return: country, inputs, outputs lists
-    ########################################
-    def parse_transformations_by_nested_parens(self, file_path):
+    def generate_random_schedule(self, size, resources_filename):
+        # Get list of resources
+        with open('resource-weights.csv', newline='') as csv:
+            reader = csv.DictReader(csv)
+            for row in reader:
+                self.RESOURCE_LIST = row['Resource']
 
-        # Read file and remove unnecessary whitespace
-        with open(file_path, "r") as file:
-            input_string = file.read()
-        input_string = input_string.replace("\n", "")
+        for i in range(size):
+            self.actions.append(self._generate_random_transfer())
+            self.actions.append(
+                self._load_random_transform_template(self.country))
 
-        # Parse the nested parentheses
-        result = nestedExpr(opener='(', closer=')').parseString(
-            input_string).asList()
+    def _generate_random_transfer(self, resources: dict):
 
-        # Extract the values
-        transform_type = result[0][0]
-        self.country = result[0][1]
-        self.inputs = result[0][2]
-        self.outputs = result[0][3]
-        # Remove the labels
-        self.inputs.remove('INPUTS')
-        self.outputs.remove('OUTPUTS')
+        # todo: generate successor?
 
-        # Print the extracted values
-        print("Transform type:", transform_type)
-        print("Country:", self.country)
-        print("Inputs:", self.inputs)
-        print("Outputs:", self.outputs)
+        if random.random() < 0.5:
+            # Generate a random transfer
+            from_country = random.choice(self.COUNTRIES)
+            to_country = random.choice(
+                [c for c in self.COUNTRIES if c != from_country])
+            resource = random.choice(resources)
+            amount = random.randint(1, 50)
+            transfer = Transfer(from_country, to_country, resource, amount)
+            self.actions.append(transfer)
+        else:
+            # Generate a random transform
+            inputs = []
+            outputs = []
+            for j in range(random.randint(1, 3)):
+
+                input_resource = random.choice(resources)
+
+                input_amount = random.randint(1, 50)
+                inputs.append((input_resource, input_amount))
+            for j in range(random.randint(1, 3)):
+                output_resource = random.choice(resources)
+
+                output_amount = random.randint(1, 50)
+                outputs.append((output_resource, output_amount))
+            transform = Transform(self.country, inputs, outputs)
+            self.actions.append(transform)
+
+    def _load_random_transform_template(self, country):
+        template_dir = "transformation-templates"
+        filenames = os.listdir(template_dir)
+        if filenames:
+            filename = random.choice(filenames)
+            with open(os.path.join(template_dir, filename), "r") as file:
+                template_str = file.read()
+                template = nestedExpr().parseString(template_str).asList()[0]
+                transform_name = template[0]
+                inputs = [(item[0], int(item[1])) for item in template[1]]
+                outputs = [(item[0], int(item[1])) for item in template[2]]
+                self.transform_templates[transform_name] = (inputs, outputs)
 
 
 #######
