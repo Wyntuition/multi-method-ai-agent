@@ -1,9 +1,11 @@
 (TRANSFORM C
            (INPUTS (Population 10)
                    (MetallicElements 20)
-                   (PotentialEnergyUsable 30)
+                   (PotentialFossilEnergyUsable 20)
+                   (PotentialRenewableEnergyUsable 10)
                    (Water 30))
            (OUTPUTS (Population 10)
                     (MetallicAlloys 10)
                     (MetallicAlloysWaste 10)
+                    (PotentialFossilEnergyUsableWaste 8)
                     (Water 20)))
