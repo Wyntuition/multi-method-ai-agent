@@ -12,6 +12,18 @@ csv_path = directory_path + "csv/"
 
 class ParseFiles():
 
+    def parse_transform_file(file_path):
+        with open(os.path.join(template_path, file_path), "r") as file:
+            return file.read()
+
+    def parse_resource_list():
+        resource_list = []
+        with open(csv_path + 'resource-weights.csv', "r", newline='') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                resource_list.append(row[0])
+        return resource_list
+
     @staticmethod
     def parse_world_state():
         # Parse world state

@@ -61,17 +61,6 @@ self_state_quality_start = ExpectedUtility.state_quality_for_country(
 print(f"My country's initial state: {country_world_state}")
 
 
-##################################
-# GENERATE SCHEDULES
-##################################
-# Get all files in the template+path directory
-template_path = directory_path + "transformation-templates/"
-
-csv_path = template_path + "alloys.txt"
-scheduler = Schedule('Dinotopia')
-schedule = scheduler.generate_random_schedule
-
-
 # def change_state(country_world_state, schedule):
 #     # Add/remove the items from the state
 #     for item in schedule.inputs:
@@ -117,8 +106,8 @@ x0 = discounted_reward - sigmoid_midpoint
 
 # TODO: tweak
 # Probability of country's acceptance of a schedule (using logistic function)
-k = 1  # steepness of the curve
-L = 1  # max value of the curve
+# k = 1  # steepness of the curve
+# L = 1  # max value of the curve
 p = ExpectedUtility.logistic_function(x0)  # x0 is midpoint of curve
 
 # Multiply them for overall schedule acceptance -
@@ -141,5 +130,5 @@ num_output_schedulers = 10
 depth_bound = 5
 max_frontier_size = 100
 
-# country_scheduler(your_country_name, resources_filename, initial_state_filename,
-#                   output_filename, num_output_schedulers, depth_bound, max_frontier_size)
+country_scheduler(your_country_name, resources_filename, world_state,
+                  output_filename, num_output_schedulers, depth_bound, max_frontier_size)

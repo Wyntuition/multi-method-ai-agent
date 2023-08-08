@@ -1,4 +1,7 @@
+import os
 from pyparsing import nestedExpr
+
+from parse_files import ParseFiles
 
 
 class Transform:
@@ -6,6 +9,10 @@ class Transform:
         self.country = country
         self.inputs = inputs
         self.outputs = outputs
+
+        self.directory_path = os.path.dirname(os.path.abspath(__file__)) + "/"
+        self.template_path = self.directory_path + "transformation-templates/"
+        self.csv_path = self.directory_path + "csv/"
 
     def __str__(self):
         input_str = "\n".join(
@@ -19,11 +26,11 @@ class Transform:
     # Input: full path to file
     # Return: country, inputs, outputs lists
     ########################################
-    def parse_transformations_by_nested_parens(self, file_path):
+    def parse_transformations_by_nested_parens(self, file_path, country):
+        self.country = country
 
         # Read file and remove unnecessary whitespace
-        with open(file_path, "r") as file:
-            input_string = file.read()
+        input_string = ParseFiles.parse_transform_file(file_path)
         input_string = input_string.replace("\n", "")
 
         # Parse the nested parentheses
@@ -32,7 +39,7 @@ class Transform:
 
         # Extract the values
         transform_type = result[0][0]
-        self.country = result[0][1]
+        country = result[0][1]
         self.inputs = result[0][2]
         self.outputs = result[0][3]
         # Remove the labels
@@ -41,7 +48,7 @@ class Transform:
 
         # Print the extracted values
         print("Transform type:", transform_type)
-        print("Country:", self.country)
+        print("Country:", country)
         print("Inputs:", self.inputs)
         print("Outputs:", self.outputs)
 
