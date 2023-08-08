@@ -1,11 +1,11 @@
-from DataTypes.Schedule import Schedule
-from DataTypes.Queue import Queue
+from data_types.Schedule import Schedule
+from data_types.Queue import Queue
 
 
 class PriorityQueue(Queue):
     '''A simple priority - elements sorted by score'''
 
-    def pop(self) -> Schedule:
+    def pop(self):
         '''Returns the element with the highest score'''
         return self.queue.pop(0)
 

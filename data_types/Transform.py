@@ -21,6 +21,13 @@ class Transform:
             [f"({key} {value})" for key, value in self.outputs.items()])
         return f"(TRANSFORM C\n   (INPUTS\n      {input_str}\n   )\n   (OUTPUTS\n      {output_str}\n   )\n)"
 
+    def __lt__(self, other):
+        """
+        Defines the < operator for the Transform class.
+        """
+        # TODO
+        return
+
     ########################################
     # Parse transformation files
     # Input: full path to file
@@ -38,7 +45,6 @@ class Transform:
             input_string).asList()
 
         # Extract the values
-        transform_type = result[0][0]
         country = result[0][1]
         self.inputs = result[0][2]
         self.outputs = result[0][3]
@@ -47,10 +53,9 @@ class Transform:
         self.outputs.remove('OUTPUTS')
 
         # Print the extracted values
-        # print("Transform type:", transform_type)
-        # print("Country:", country)
-        # print("Inputs:", self.inputs)
-        # print("Outputs:", self.outputs)
+        print("Country:", country)
+        print("Inputs:", self.inputs)
+        print("Outputs:", self.outputs)
 
 
 #######

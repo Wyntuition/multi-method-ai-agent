@@ -1,13 +1,12 @@
 import os
 from random import choice, randint, random
-from DataTypes.Transfer import Transfer
-from DataTypes.Transform import Transform
+from data_types.Transfer import Transfer
+from data_types.Transform import Transform
 from pyparsing import nestedExpr
 
 
 class Schedule:
-    def __init__(self, self_country):
-        self.country = self_country
+    def __init__(self, actions, score):
         self.actions = []
         self.score = 0.0
 

@@ -28,6 +28,11 @@ class ExpectedUtility:
     '''
 
     @staticmethod
+    def apply_schedule(world_state, schedule):
+
+        world_state.apply_action()
+
+    @staticmethod
     def state_quality_function(resource_weight, resource_amount, resource_proportion, population) -> float:
         state_quality = resource_weight * resource_proportion * resource_amount / population
         return state_quality

@@ -3,7 +3,7 @@
 import csv
 import os
 
-from DataTypes.State import State
+from data_types.CountryState import CountryState
 
 directory_path = os.path.dirname(os.path.abspath(__file__)) + "/"
 template_path = directory_path + "transformation-templates/"
@@ -55,13 +55,13 @@ class ParseFiles():
 
     # Parse world state csv files
     @staticmethod
-    def parse_csv(file_path) -> list[State]:
+    def parse_csv(file_path) -> list[CountryState]:
         world_state = []
         with open(file_path, "r") as file:
             csv_reader = csv.reader(file)
             next(csv_reader)  # Skip the header row
             for row in csv_reader:
-                state = State(*row)
+                state = CountryState(*row)
                 world_state.append(state)
         return world_state
 

@@ -18,5 +18,5 @@ num_output_schedulers = 10
 depth_bound = 5
 max_frontier_size = 100
 
-country_scheduler(your_country_name, resources_filename, world_state,
-                  output_filename, num_output_schedulers, depth_bound, max_frontier_size)
+country_scheduler(your_country_name, world_state, output_filename,
+                  num_output_schedulers, depth_bound, max_frontier_size)
