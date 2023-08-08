@@ -52,10 +52,10 @@ class Transform:
         self.inputs.remove('INPUTS')
         self.outputs.remove('OUTPUTS')
 
-        # Print the extracted values
-        print("Country:", country)
-        print("Inputs:", self.inputs)
-        print("Outputs:", self.outputs)
+        # # Print the extracted values
+        # print("Country:", country)
+        # print("Inputs:", self.inputs)
+        # print("Outputs:", self.outputs)
 
 
 #######

@@ -7,8 +7,6 @@ class WorldState:
         self.world_state = countries
 
     def apply_schedule(self, schedule):
-        # if schedule is None:
-        #     return self.world_state
         for action in schedule:
             self.apply_action(action)
         return self.world_state
@@ -28,16 +26,22 @@ class WorldState:
                 amount = int(from_country[transfer.resource])
                 amount -= transfer.amount
                 from_country[transfer.resource] == amount
+                self.world_state[transfer.from_country][transfer.resource] = amount
 
                 amount = int(to_country[transfer.resource])
                 amount += transfer.amount
                 to_country[transfer.resource] == amount
+                self.world_state[transfer.to_country][transfer.resource] = amount
 
     def apply_transform(self, transform):
         for input_resource, input_amount in transform.inputs:
-            if self.world_state[transform.country][input_resource] < input_amount:
+            amount = int(self.world_state[transform.country][input_resource])
+            if amount < int(input_amount):
                 return
-        for input_resource, input_amount in transform.inputs:
-            self.world_state[transform.country][input_resource] -= input_amount
+            else:
+                amount -= int(input_amount)
+                self.world_state[transform.country][input_resource] = amount
         for output_resource, output_amount in transform.outputs:
-            self.world_state[transform.country][output_resource] += output_amount
+            amount = int(self.world_state[transform.country][output_resource])
+            amount += int(output_amount)
+            self.world_state[transform.country][output_resource] = amount

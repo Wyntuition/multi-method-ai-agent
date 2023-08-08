@@ -1,3 +1,4 @@
+from operator import attrgetter
 from data_types.Schedule import Schedule
 from priority_queue import PriorityQueue
 
@@ -45,8 +46,11 @@ class BestFirstSearch:
             else:
                 for i in range(len(self.best_schedules)):
                     if expected_utility > self.best_schedules[i].score:
-                        self.best_schedules[i] = Schedule(
-                            expected_utility, schedule)
+                        self.best_schedules.pop(0)
+                        self.best_schedules.append(
+                            Schedule(expected_utility, schedule))
+                # TODO1
+                # self.best_schedules.sort(key=attrgetter('score'))
 
             # Add current state to explored set
             explored.append(schedule)

@@ -6,13 +6,13 @@ from successors import RandomSuccessorFunction
 
 def score_schedule(schedule, self_country_name, initial_world_state, resource_weights, resource_proportions):
 
-    print(initial_world_state)
+    # print(initial_world_state)
 
     # Calculate initial state quality
     self_state_quality_start = ExpectedUtility.state_quality_for_country(
         initial_world_state[self_country_name], resource_weights, resource_proportions)
-    print(
-        f"My country's initial state: {initial_world_state[self_country_name]}")
+    # print(
+    #     f"My country's initial state: {initial_world_state[self_country_name]}")
 
     world_state = WorldState(initial_world_state)
     sch_gen = RandomSuccessorFunction(self_country_name)
@@ -23,8 +23,8 @@ def score_schedule(schedule, self_country_name, initial_world_state, resource_we
     self_state_quality_end = ExpectedUtility.state_quality_for_country(
         updated_world_state[self_country_name], resource_weights, resource_proportions)
     print(f"Starting State Quality: {self_state_quality_start}")
-    print(
-        f"Country's state after transform: {updated_world_state[self_country_name]}")
+    # print(
+    #     f"Country's state after transform: {updated_world_state[self_country_name]}")
     print(f"Ending State Quality: {self_state_quality_end}")
 
     # Probability of schedule acceptance

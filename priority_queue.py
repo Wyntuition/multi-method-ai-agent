@@ -12,4 +12,5 @@ class PriorityQueue(Queue):
     def put(self, schedule: Schedule) -> None:
         '''Adds an element to the queue and sorts it'''
         self.queue.append(schedule)
-        self.queue.sort(key=lambda x: x.score)
+        # TODO
+        # self.queue.sort(key=lambda x: x.score)
