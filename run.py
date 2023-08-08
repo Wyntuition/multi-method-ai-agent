@@ -1,5 +1,12 @@
 import os
 from country_scheduler import country_scheduler
+from parse_files import ParseFiles
+
+directory_path = os.path.dirname(os.path.abspath(__file__)) + "/"
+
+csv_path = directory_path + 'csv/'
+world_state = ParseFiles.parse_csv_dict(
+    csv_path + 'initial-world-state.csv')
 
 
 # run country scheduler
