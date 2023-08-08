@@ -7,8 +7,8 @@ from pyparsing import nestedExpr
 
 class Schedule:
     def __init__(self, actions, score):
-        self.actions = []
-        self.score = 0.0
+        self.actions = actions
+        self.score = score
 
 
 #######
