@@ -47,10 +47,10 @@ class Transform:
         self.outputs.remove('OUTPUTS')
 
         # Print the extracted values
-        print("Transform type:", transform_type)
-        print("Country:", country)
-        print("Inputs:", self.inputs)
-        print("Outputs:", self.outputs)
+        # print("Transform type:", transform_type)
+        # print("Country:", country)
+        # print("Inputs:", self.inputs)
+        # print("Outputs:", self.outputs)
 
 
 #######
