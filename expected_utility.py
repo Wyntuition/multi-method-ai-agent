@@ -34,10 +34,12 @@ class ExpectedUtility:
 
     @staticmethod
     def state_quality_function(resource_weight, resource_amount, resource_proportion, population) -> float:
-        state_quality = resource_weight * resource_proportion * resource_amount / population
-        return state_quality
+        if (population <= 0):
+            return 0
+        return resource_weight * resource_proportion * resource_amount / population
 
     # Calculate state quality for all countries
+
     @staticmethod
     def state_quality_for_all(world_state, resource_weights, resource_proportions):
         print("CALCULATING STATE QUALITY...--~~~```")

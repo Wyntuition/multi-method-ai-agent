@@ -16,9 +16,9 @@ class Transform:
 
     def __str__(self):
         input_str = "\n".join(
-            [f"({key} {value})" for key, value in self.inputs.items()])
+            [f"({key} {value})" for key, value in self.inputs])
         output_str = "\n".join(
-            [f"({key} {value})" for key, value in self.outputs.items()])
+            [f"({key} {value})" for key, value in self.outputs])
         return f"(TRANSFORM C\n   (INPUTS\n      {input_str}\n   )\n   (OUTPUTS\n      {output_str}\n   )\n)"
 
     def __lt__(self, other):

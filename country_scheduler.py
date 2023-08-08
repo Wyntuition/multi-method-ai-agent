@@ -14,16 +14,21 @@ def country_scheduler(self_country_name: str, initial_world_state: dict,
         sch_gen = RandomSuccessorFunction(self_country_name)
 
         successors = []
-        for _ in range(10):  # Generate 10 successors
-            successor = sch_gen.generate_random_schedule(5)
+        for _ in range(10):  # of schedules
+            successor = sch_gen.generate_random_schedule(1)  # actions/schedule
             successors.append(successor)
         return successors
 
-    search = BestFirstSearch()
-    best_schedules = search.search(self_country_name, initial_world_state, successor_fn,
-                                   depth_bound, max_frontier_size, max_best_schedules)
+    search_obj = BestFirstSearch()
+    search_obj.search(self_country_name, initial_world_state, successor_fn,
+                      depth_bound, max_frontier_size, max_best_schedules)
 
-    print(best_schedules)
+    for schedule in search_obj.best_schedules:
+        for action in schedule.actions:
+            print(str(action))
+        print(" EU: " + str(schedule.score))
+        print("############################################################")
+
     ######################################
     # write schedule to file
     ######################################
