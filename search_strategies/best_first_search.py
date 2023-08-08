@@ -25,7 +25,7 @@ class BestFirstSearch:
         explored = []
         depth = 0
 
-        # TODO1 - move out - tweak
+        # TODO - move out - tweak
         resource_weights = ParseFiles.parse_resources_weights()
         resource_proportions = ParseFiles.parse_resources_proportions()
 
@@ -50,8 +50,7 @@ class BestFirstSearch:
                         self.best_schedules.pop(0)
                         self.best_schedules.append(
                             Schedule(expected_utility, schedule))
-                # TODO1
-                # self.best_schedules.sort(key=attrgetter('score'))
+                self.best_schedules.sort(key=attrgetter('score'))
 
             # Add current state to explored set
             explored.append(schedule)

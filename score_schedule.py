@@ -6,9 +6,18 @@ from successors import RandomSuccessorFunction
 
 def score_schedule(schedule, self_country_name, initial_world_state, resource_weights, resource_proportions):
 
-    # print(initial_world_state)
+    # Calculate the state quality for each country in the schedule
+    # TODO - this needs to use updated state quality function
+    state_qualities = {}
+    for country_name, resource_amounts in schedule.items():
+        if country_name == self_country_name:
+            continue
+        state_quality = ExpectedUtility.state_quality_for_all(
+            resource_amounts, country_name)
+        state_qualities[country_name] = state_quality
+    participating_countries = list(state_qualities.keys())
 
-    # Calculate initial state quality
+    # Calculate initial state quality for my country
     self_state_quality_start = ExpectedUtility.state_quality_for_country(
         initial_world_state[self_country_name], resource_weights, resource_proportions)
     # print(
@@ -44,9 +53,8 @@ def score_schedule(schedule, self_country_name, initial_world_state, resource_we
     print(f"Discounted Reward for {self_country_name}: {discounted_reward}")
 
     # calculate schedule EU
-    # todo1 - Gather participating countries from schedule, or check if SQ changed (Live 8 3:00)
-    participating_countries = ["Dinotopia", "Atlantis"]
-    sigmoid_midpoint = 1  # todo is this right?
+    # TODO check if SQ changed (Live 8 3:00)
+    sigmoid_midpoint = 1
     x0 = discounted_reward - sigmoid_midpoint
 
     # TODO: tweak

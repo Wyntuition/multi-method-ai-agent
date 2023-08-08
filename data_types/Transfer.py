@@ -12,7 +12,7 @@ class Transfer:
         """
         Defines the < operator for the Transfer class.
         """
-        # TODO
+        # TODO - investigate strange bug
         if not isinstance(other, Transfer):
             return
         return self.amount < other.amount
