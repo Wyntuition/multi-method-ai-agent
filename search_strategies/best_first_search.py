@@ -25,6 +25,7 @@ class BestFirstSearch:
         explored = []
         depth = 0
 
+        # TODO1 - move out - tweak
         resource_weights = ParseFiles.parse_resources_weights()
         resource_proportions = ParseFiles.parse_resources_proportions()
 

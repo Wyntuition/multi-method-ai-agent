@@ -31,7 +31,7 @@ class RandomSuccessorFunction:
         to_country = choice(
             [c for c in self.COUNTRIES if c != from_country])
         resource = choice(self.RESOURCE_LIST)
-        amount = randint(1, 20)
+        amount = randint(1, 10)
         transfer = Transfer(from_country, to_country, resource, amount)
         self.actions.append(transfer)
 

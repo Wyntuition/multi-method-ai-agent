@@ -14,8 +14,8 @@ your_country_name = "Dinotopia"
 resources_filename = "resources.csv"
 initial_state_filename = "initial_world_state.csv"
 output_filename = "output.csv"
-num_output_schedulers = 10
-depth_bound = 5
+num_output_schedulers = 100
+depth_bound = 100
 max_frontier_size = 100
 
 country_scheduler(your_country_name, world_state, output_filename,

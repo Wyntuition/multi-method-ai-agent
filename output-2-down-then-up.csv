@@ -1,0 +1,59 @@
+0
+[[<data_types.Transform.Transform object at 0x10e57a470>]]
+ EU: 0.0024143917342247384
+(TRANSFER Brodingnang Carpania ((MetallicElements 3)))
+ EU: 0.047487512373629345
+"(TRANSFORM C
+   (INPUTS
+      (Population 1)
+(MetallicElements 3)
+(MetallicAlloys 2)
+(PotentialEnergyUsable 3)
+(Water 3)
+   )
+   (OUTPUTS
+      (Population 1)
+(Electronics 2)
+(ElectronicsWaste 1)
+(Water 2)
+   )
+)"
+ EU: -0.008453662586492161
+"(TRANSFORM C
+   (INPUTS
+      (AvailableLand 1)
+(Population 5)
+(Water 5)
+(MetallicElements 1)
+(Timber 5)
+(MetallicAlloys 3)
+(PotentialEnergyUsable 5)
+   )
+   (OUTPUTS
+      (Housing 1)
+(HousingWaste 1)
+(Population 5)
+(Water 4)
+   )
+)"
+ EU: -0.030341261919583876
+"(TRANSFORM C
+   (INPUTS
+      (AvailableLand 1)
+(Population 5)
+(Water 5)
+(MetallicElements 1)
+(Timber 5)
+(MetallicAlloys 3)
+(PotentialEnergyUsable 5)
+   )
+   (OUTPUTS
+      (Housing 1)
+(HousingWaste 1)
+(Population 5)
+(Water 4)
+   )
+)"
+ EU: 0.0038126750376333146
+(TRANSFER Atlantis Carpania ((MetallicElements 8)))
+ EU: 0.05669472070287318

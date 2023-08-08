@@ -1,3 +1,4 @@
+import csv
 from search_strategies.best_first_search import BestFirstSearch
 from successors import RandomSuccessorFunction
 
@@ -14,8 +15,8 @@ def country_scheduler(self_country_name: str, initial_world_state: dict,
         sch_gen = RandomSuccessorFunction(self_country_name)
 
         successors = []
-        for _ in range(10):  # of schedules
-            successor = sch_gen.generate_random_schedule(1)  # actions/schedule
+        for _ in range(5):  # of partial schedules
+            successor = sch_gen.generate_random_schedule(4)  # actions/schedule
             successors.append(successor)
         return successors
 
@@ -23,16 +24,35 @@ def country_scheduler(self_country_name: str, initial_world_state: dict,
     search_obj.search(self_country_name, initial_world_state, successor_fn,
                       depth_bound, max_frontier_size, max_best_schedules)
 
-    for schedule in search_obj.best_schedules:
-        for action in schedule.actions:
-            print(str(action))
-        print(" EU: " + str(schedule.score))
-        print("############################################################")
+    # for schedule in search_obj.best_schedules:
+    #     for action in schedule.actions:
+    #         print(str(action))
+    #     print(" EU: " + str(schedule.score))
+    #     print("############################################################")
 
     ######################################
     # write schedule to file
     ######################################
     # with open(output_filename, 'w') as f:
     #     writer = csv.writer(f)
-    #     for i in range(num_output_schedulers):
-    #         writer.writerow(best_schedules[)
+    #     for schedule in search_obj.best_schedules:
+    #         for action in schedule.actions:
+    #             writer.writerow([str(action)])
+    #             print(str(action))
+    #         writer.writerow([" EU: " + str(schedule.score)])
+
+    # `with open(output_filename, 'w', encoding='utf8') as f:
+    #     for schedule in search_obj.best_schedules:
+    #         for action in schedule.actions:
+    #             f.write(str(action))
+    #         f.write(" EU: " + str(schedule.score))  # TODO1`
+
+    with open(output_filename, 'w', encoding='utf8') as f_actions, \
+            open('scores', 'w', encoding='utf8') as f_scores:
+        for schedule in search_obj.best_schedules:
+            for action in schedule.actions:
+                f_actions.write(str(action))
+                print(str(action))
+            f_actions.write(" EU: " + str(schedule.score) + "\n")
+            f_scores.write(str(schedule.score) + ",\n")
+            print(str("EU: " + str(schedule.score)))

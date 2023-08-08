@@ -38,7 +38,30 @@ class ExpectedUtility:
             return 0
         return resource_weight * resource_proportion * resource_amount / population
 
-    # Calculate state quality for all countries
+    def state_quality_function_energy(resource_weights, resource_amounts, resource_proportions, population, carbon_footprint) -> float:
+        if population <= 0:
+            return 0
+
+        # Calculate total resource quality
+        total_quality = 0
+        for resource in resource_weights:
+            if resource == "CarbonFootprint":
+                continue
+            if resource in resource_amounts:
+                weight = resource_weights[resource]
+                amount = resource_amounts[resource]
+                proportion = resource_proportions.get(resource, 1)
+                quality = weight * proportion * amount / population
+                total_quality += quality
+
+        # Calculate carbon footprint quality
+        carbon_weight = resource_weights.get("CarbonFootprint", 0)
+        carbon_proportion = resource_proportions.get("CarbonFootprint", 1)
+        carbon_quality = carbon_weight * carbon_proportion * carbon_footprint / population
+
+        # Combine total quality and carbon quality
+        state_quality = total_quality - carbon_quality
+        return state_quality
 
     @staticmethod
     def state_quality_for_all(world_state, resource_weights, resource_proportions):

@@ -14,18 +14,14 @@ Start with `run.py` as it is the entrypoint to the agent running. You can see it
 
 Calculations are implemented in the class `ExpectedUtility`, and called in the right sequence to determine the Expected Utility, in the `run.py` file.
 
-## Classes to represent State, Action Templates, Actions 
-
-- See `Schedule.py`, `State.py` and run.py is the current agent parsing templates and CSV files, and running them concretely
-
 ## Resources, Weights, Initial World State
 
 Resources
 - `resource-weights.csv` - defines resource weights 
-- `resource-proportional.csv` - is to define the proportion of resource each person gets
+- `resource-proportions.csv` - is to define the proportion of resource each person gets
+- `resource-weights--energy.csv` - defines resource weights 
 
 Initial World States
 - `initial-world-state.csv` - default world state
-- `initial-world-state--same-resources.csv` - default world state
 - `initial-world-state--energy.csv` - world state where a lot of potential energy is handed out to see how that affects things 
 

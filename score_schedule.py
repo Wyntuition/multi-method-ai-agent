@@ -51,8 +51,8 @@ def score_schedule(schedule, self_country_name, initial_world_state, resource_we
 
     # TODO: tweak
     # Probability of country's acceptance of a schedule (using logistic function)
-    # k = 1  # steepness of the curve
-    # L = 1  # max value of the curve
+    const_k = 1  # steepness of the curve
+    const_L = 1  # max value of the curve
     p = ExpectedUtility.logistic_function(x0)  # x0 is midpoint of curve
 
     # Multiply them for overall schedule acceptance -
@@ -61,8 +61,8 @@ def score_schedule(schedule, self_country_name, initial_world_state, resource_we
     print(f"Probability of schedule acceptance: {p}")
 
     # Expected Utility calculation
-    c = 0.1
-    eu = ExpectedUtility.expected_utility(p, discounted_reward, c)
+    const_c = 0.1
+    eu = ExpectedUtility.expected_utility(p, discounted_reward, const_c)
     print(f"Expected Utility: {eu}")
 
     return eu
