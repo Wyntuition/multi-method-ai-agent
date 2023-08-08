@@ -23,16 +23,11 @@ def country_scheduler(self_country_name: str, initial_world_state: dict,
     best_schedules = search.search(self_country_name, initial_world_state, successor_fn,
                                    depth_bound, max_frontier_size, max_best_schedules)
 
+    print(best_schedules)
     ######################################
     # write schedule to file
     ######################################
     # with open(output_filename, 'w') as f:
     #     writer = csv.writer(f)
     #     for i in range(num_output_schedulers):
-    # writer.writerow(solution.get_schedule(i))
-    # for filename in os.listdir('transformation-templates', 'r'):
-    #     template_path = os.path.join(templates_path, filename)
-    #     with open(template_path, 'r') as file:
-    #         contents = file.read().strip()
-    #         transform = Transform(template_path, self.logger)
-    #         actions.append(transform_action)
+    #         writer.writerow(best_schedules[)

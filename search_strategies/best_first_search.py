@@ -65,4 +65,4 @@ class BestFirstSearch:
                 if successor not in explored:
                     frontier.put(successor)
 
-        return None
+        return self.best_schedules
