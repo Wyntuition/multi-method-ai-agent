@@ -1,8 +1,8 @@
 from parse_files import ParseFiles
 import os
 from random import choice, randint, random
-from data_types.Transfer import Transfer
-from data_types.Transform import Transform
+from transfer import Transfer
+from transform import Transform
 
 
 class RandomSuccessorFunction:
@@ -10,6 +10,7 @@ class RandomSuccessorFunction:
         self.self_country = self_country
         self.actions = []
 
+        # todo - use the country list from the csv
         self.COUNTRIES = ['Dinotopia', 'Atlantis',
                           'Brodingnang', 'Carpania', 'Erewhon']
         self.RESOURCE_LIST = ParseFiles.parse_resource_list()

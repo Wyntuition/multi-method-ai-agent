@@ -1,5 +1,5 @@
 from operator import attrgetter
-from data_types.Schedule import Schedule
+from schedule import Schedule
 from priority_queue import PriorityQueue
 
 from parse_files import ParseFiles

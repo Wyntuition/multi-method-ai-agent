@@ -1,7 +1,7 @@
 '''Defines ScheduleContainer abstract class'''
 from abc import ABC, abstractmethod
 
-from data_types.Schedule import Schedule
+from schedule import Schedule
 
 
 class Queue(ABC):

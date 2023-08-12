@@ -1,5 +1,5 @@
 
-from data_types.WorldState import WorldState
+from world_state import WorldState
 from expected_utility import ExpectedUtility
 from successors import RandomSuccessorFunction
 

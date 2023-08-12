@@ -1,0 +1,25 @@
+trade_rates = {
+    "Atlantis": {
+        "Atlantis": 0,
+        "Brodingnang": 0.5,  # Trade rate before tariff
+        "Carpania": 0.3
+    },
+    "Brodingnang": {
+        "Atlantis": 0.5,  # Trade rate before tariff
+        "Brodingnang": 0,
+        "Carpania": 0.2
+    },
+    "Carpania": {
+        "Atlantis": 0.3,
+        "Brodingnang": 0.2,
+        "Carpania": 0
+    }
+}
+
+# Simulate the effect of tariffs imposed
+#   In this example, the trade rate between "Country A" and "Country B" before the tariff is 0.5. 
+#   After the imposition of a 20% tariff, the trade rate between those two countries decreases to 
+#   0.4 (0.5 * (1 - 0.2)).
+tariff_rate = 0.2  # 20% tariff rate
+trade_rates["Atlantis"]["Brodingnang"] *= (1 - tariff_rate)
+trade_rates["Brodingnang"]["Atlantis"] *= (1 - tariff_rate)

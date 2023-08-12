@@ -1,5 +1,5 @@
-from data_types.Transfer import Transfer
-from data_types.Transform import Transform
+from transfer import Transfer
+from transform import Transform
 
 
 class WorldState:

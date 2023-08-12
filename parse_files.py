@@ -3,7 +3,7 @@
 import csv
 import os
 
-from data_types.CountryState import CountryState
+from country_state import CountryState
 
 directory_path = os.path.dirname(os.path.abspath(__file__)) + "/"
 template_path = directory_path + "transformation-templates/"

@@ -88,7 +88,7 @@ print(f"Discounted Reward for {self_country}: {discounted_reward}")
 
 # todo - move rest to classes so easier. Gather participating countries from schedule, or check if SQ changed (Live 8 3:00)
 participating_countries = ["Dinotopia", "Atlantis"]
-sigmoid_midpoint = 1  # todo is this right?
+sigmoid_midpoint = 1
 x0 = discounted_reward - sigmoid_midpoint
 
 

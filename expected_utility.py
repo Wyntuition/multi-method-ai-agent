@@ -13,8 +13,6 @@ class ExpectedUtility:
 
     INPUTS: state, schedule, resource weights
 
-    PROCESSING: State quality for each country: For each resource, run through state value function and aggregate the values
-
     Psudocode:
     for each country:
         for each resource:
@@ -29,7 +27,6 @@ class ExpectedUtility:
 
     @staticmethod
     def apply_schedule(world_state, schedule):
-
         world_state.apply_action()
 
     @staticmethod
@@ -55,13 +52,58 @@ class ExpectedUtility:
                 total_quality += quality
 
         # Calculate carbon footprint quality
-        carbon_weight = resource_weights.get("CarbonFootprint", 0)
-        carbon_proportion = resource_proportions.get("CarbonFootprint", 1)
+        carbon_weight = resource_weights["CarbonFootprint"]
+        carbon_proportion = resource_proportions["CarbonFootprint"]
         carbon_quality = carbon_weight * carbon_proportion * carbon_footprint / population
 
         # Combine total quality and carbon quality
         state_quality = total_quality - carbon_quality
         return state_quality
+
+    def state_quality_function_gdp(world_state, resource_weights, resource_proportions, trade_rates):
+        # Calculate GDP based on the value of goods and services produced
+        gdp = 0
+        for key, value in world_state.items():
+            if key == "Population":
+                continue
+            if key in resource_weights and key in resource_proportions:
+                weight = resource_weights[key]
+                proportion = resource_proportions[key]
+                value = value * weight * proportion
+                gdp += value
+
+        # Calculate GDP based on the value of trade
+        for country_name, trade_rates_for_country in trade_rates.items():
+            for other_country_name, trade_rate in trade_rates_for_country.items():
+                if trade_rate == 0:
+                    continue
+                if country_name not in world_state or other_country_name not in world_state:
+                    continue
+                country_gdp = gdp_for_country(
+                    world_state, resource_weights, resource_proportions, country_name)
+                other_country_gdp = gdp_for_country(
+                    world_state, resource_weights, resource_proportions, other_country_name)
+                trade_value = trade_rate * min(country_gdp, other_country_gdp)
+                gdp += trade_value
+
+        # Return the GDP as the utility value
+        return gdp
+
+    def gdp_for_country(world_state, resource_weights, resource_proportions, country_name):
+        # Calculate GDP based on the value of goods and services produced by the country
+        gdp = 0
+        for key, value in world_state.items():
+            if key == "Population":
+                continue
+            if key in resource_weights and key in resource_proportions:
+                weight = resource_weights[key]
+                proportion = resource_proportions[key]
+                value = value * weight * proportion
+                if key == "Money" and country_name in value:
+                    gdp += value[country_name]
+                elif key == "Labor":
+                    gdp += value * proportion
+        return gdp
 
     @staticmethod
     def state_quality_for_all(world_state, resource_weights, resource_proportions):
