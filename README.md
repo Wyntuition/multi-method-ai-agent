@@ -1,4 +1,4 @@
-# AI (CS5260) - Class Project
+# AI Class Project
 
 A multi-method AI agent that plans and models trading and development (e.g., farming, manufacturing) decisions for a set of virtual countries, with each country possessing virtual resources and incentives for cooperating and competing with other countries. It uses a forward-searching, utility-driven, depth-bounded search, utility-driven scheduler.
 
