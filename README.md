@@ -15,7 +15,6 @@ Details:
     * Probability of acceptance
     * x0 
     * Constants K and l are used to adjust impact of resources weights and proportions on state quality 
-    * Gamma - discount factor that determines the importance of future rewards relative to immediate rewards
     * Failure cost - const_c
 
 ## Running 
